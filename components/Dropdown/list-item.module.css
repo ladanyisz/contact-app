@@ -1,0 +1,31 @@
+.listItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 10px;
+    gap: 12px;
+
+    width: 219px;
+    height: 44px;
+
+    background-color: var(--G-80);
+}
+
+.listItem:hover {
+    background: var(--G-70);
+    cursor: pointer;
+}
+
+.listItem:active {
+    background: var(--G-60);
+}
+
+.listItem:first-of-type {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.listItem:last-of-type {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}

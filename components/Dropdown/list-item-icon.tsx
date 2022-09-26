@@ -5,6 +5,7 @@ interface Props {
     alt: string;
 }
 
+// TODO: secondary color
 const ListItemIcon = (props: Props) => {
     return <Image 
                 src={props.src} 

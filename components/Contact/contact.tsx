@@ -1,8 +1,11 @@
+import { Dropdown } from 'react-bootstrap';
 import { ButtonType, ButtonVariation } from '../../models/ButtonType';
 import { IContact } from '../../models/Contact';
 import { ProfilePicSize } from '../../models/ProfilePicSize';
 import Button from '../Button/button';
-import ListItemIcon from '../list-item-icon';
+import DropdownButton from '../Dropdown/dropdown-button';
+import List from '../Dropdown/list';
+import ListItem from '../Dropdown/list-item';
 import ProfilePic from '../ProfilePic/profile-pic';
 
 import styles from './contact.module.css';
@@ -25,29 +28,40 @@ const Contact = (props: { contact: IContact }) => {
 
             <div className={styles.actionButtons}>
                 <Button
-                    type={ButtonType.Secondary}
-                    variation={ButtonVariation.Icon}
+                    btnType={ButtonType.Secondary}
+                    btnVariation={ButtonVariation.Icon}
                     icon='/icons/Mute.svg'
                     alt='Mute'
                 />
                 <Button
-                    type={ButtonType.Secondary}
-                    variation={ButtonVariation.Icon}
+                    btnType={ButtonType.Secondary}
+                    btnVariation={ButtonVariation.Icon}
                     icon='/icons/Call.svg'
                     alt='Call'
                 />
-                <Button
-                    type={ButtonType.Secondary}
-                    variation={ButtonVariation.Icon}
+                {/* <Button
+                    btnType={ButtonType.Secondary}
+                    btnVariation={ButtonVariation.Icon}
                     icon='/icons/More.svg'
                     alt='More'
                     data-bs-toggle="dropdown" aria-expanded="false"
-                />
-                <ul className='dropdown-menu'>
-                    <li><a className='dropdown-item'>A</a></li>
-                    <li><a className='dropdown-item'>B</a></li>
-                    <li><a className='dropdown-item'>C</a></li>
-                </ul>
+                /> */}
+                <Dropdown>
+                    <Dropdown.Toggle as={DropdownButton}>
+                        <Button
+                            btnType={ButtonType.Secondary}
+                            btnVariation={ButtonVariation.Icon}
+                            icon='/icons/More.svg'
+                            alt='More'
+                            data-bs-toggle="dropdown" aria-expanded="false"
+                        />
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu as={List}>
+                        <Dropdown.Item as={ListItem} icon="/icons/Settings.svg" alt='Edit' label='Edit'/>
+                        <Dropdown.Item as={ListItem} icon="/icons/Favourite.svg" alt='Favourite' label='Favourite'/>
+                        <Dropdown.Item as={ListItem} icon="/icons/Delete.svg" alt='Remove' label='Remove'/>
+                    </Dropdown.Menu>
+                </Dropdown>
             </div>
         </div>
     );

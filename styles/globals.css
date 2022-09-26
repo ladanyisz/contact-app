@@ -124,3 +124,7 @@ h3 {
 .disabled {
   color: var(--disabled);
 }
+
+.dropdown-menu {
+  color: var(--primary);
+}

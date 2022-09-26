@@ -3,8 +3,8 @@ import { ButtonType, ButtonVariation } from '../../models/ButtonType';
 import styles from './button.module.css';
 
 export interface Props {
-    type: ButtonType;
-    variation: ButtonVariation;
+    btnType: ButtonType;
+    btnVariation: ButtonVariation;
     label?: string;
     icon?: string;
     alt?: string;
@@ -27,7 +27,8 @@ const Button = (props: Props) => {
 
     return (
         <button
-            className={`${styles[props.type]} ${styles[props.variation]} ${
+            type='button'
+            className={`${styles[props.btnType]} ${styles[props.btnVariation]} ${
                 styles.btn
             }`}
             onClick={props.onClickHandler}
