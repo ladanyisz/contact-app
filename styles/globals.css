@@ -1,49 +1,126 @@
+:root {
+  --G-100: #141414;
+  --G-90: #191919;
+  --G-80: #1E1E1E;
+  --G-70: #232323;
+  --G-60: #282828;
+  --G-50: #2D2D2D;
+  --G-40: #323232;
+  --G-30: #373737;
+  --G-20: #3C3C3C;
+  --G-10: #414141;
+  
+  --primary: #FFFFFF;
+  --secondary: rgba(255, 255, 255, 0.56);
+  --disabled: rgba(255, 255, 255, 0.32);
+}
+
 @font-face {
-  font-family: 'glysa';
+  font-family: 'Glysa';
   src: url('../assets/fonts/Glysa.otf') format('opentype');
 }
 
 @font-face {
-  font-family: 'lexend-deca';
-  src: url('../assets/fonts/LexendDeca-VariableFont_wght.ttf') format('ttf');
+  font-family: 'Lexend Deca';
+  src: url('../assets/fonts/LexendDeca-VariableFont_wght.ttf');
 }
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'lexend-deca';
+  background-color: var(--G-100);
+  color: var(--primary);
+  font-family: 'Lexend Deca';
+  font-style: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  letter-spacing: 1%;
+  letter-spacing: 0.01em;
 }
 
 h1 {
-  font-family: 'glysa';
-  font-size: 32px;
-  font-weight: bolder;
-  line-height: 48px;
-  letter-spacing: 0%;
+  font-family: 'Glysa';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 40px;
 }
 
 h2 {
-  font-family: 'glysa';
+  font-family: 'Glysa';
   font-weight: bolder;
   font-size: 24px;
   line-height: 40px;
-  letter-spacing: 0%;
 }
 
 h3 {
-  font-family: 'lexend-deca';
+  font-family: 'Lexend Deca';
+  font-style: normal;
+  font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  letter-spacing: 1%;
+  letter-spacing: 0.01em;
+  margin: 0;
 }
 
 .message {
-  font-family: 'lexend-deca';
+  font-family: 'Lexend Deca';
+  font-style: normal;
+  font-weight: 400;
   font-size: 12px;
-  line-height: 12px;
-  letter-spacing: 1%;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+}
+
+.G-100 {
+  background-color: var(--G-100);
+}
+
+.G-90 {
+  background-color: var(--G-90);
+}
+
+.G-80 {
+  background-color: var(--G-80);
+}
+
+.G-70 {
+  background-color: var(--G-70);
+}
+
+.G-60 {
+  background-color: var(--G-60);
+}
+
+.G-50 {
+  background-color: var(--G-50);
+}
+
+.G-40 {
+  background-color: var(--G-40);
+}
+
+.G-30 {
+  background-color: var(--G-30);
+}
+
+.G-20 {
+  background-color: var(--G-20);
+}
+
+.G-10 {
+  background-color: var(--G-10);
+}
+
+.primary {
+  color: var(--primary);
+}
+
+.secondary {
+  color: var(--secondary);
+}
+
+.disabled {
+  color: var(--disabled);
 }

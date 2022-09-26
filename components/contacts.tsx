@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { IContact } from "../models/Contact";
-import Contact from "./contact";
+import Contact from "./Contact/contact";
+
 
 const CONTACTS: IContact[] = [
     {

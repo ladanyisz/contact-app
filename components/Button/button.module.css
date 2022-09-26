@@ -1,0 +1,69 @@
+.btn {
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Icon and Text */
+.iconAndText {
+    padding: 8px 16px 8px 12px;
+    width: 119px;
+    height: 40px;    
+}
+
+/* Text */
+.text {
+    padding: 8px 16px;
+    width: 91px;
+    height: 40px;
+}
+
+/* Icon */
+.icon {
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+}
+
+
+/* Primary */
+.primary {
+    background-color: var(--G-60);
+}
+
+.primary:hover {
+    background-color: var(--G-50);
+}
+
+.primary:active {
+    background-color: var(--G-40);
+}
+
+/* Secondary */
+.secondary {
+    background-color: var(--G-100);
+}
+
+.secondary:hover {
+    background-color: var(--G-90);
+}
+
+.secondary:active {
+    background-color: var(--G-90);
+}
+
+/* Special */
+.special {
+    background: linear-gradient(180deg, rgba(40, 40, 40, 0.7) 0%, #282828 100%), #141414;
+    border-radius: 1000px;
+}
+
+.special:hover {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04)), linear-gradient(180deg, rgba(40, 40, 40, 0.7) 0%, #282828 100%), #141414;
+}
+
+.special:active {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04)), linear-gradient(180deg, rgba(40, 40, 40, 0.7) 0%, #282828 100%), #141414;
+}
