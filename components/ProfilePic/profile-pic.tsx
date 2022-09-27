@@ -15,7 +15,6 @@ const ProfilePic = (props: Props) => {
     return <Image className={styles.image} 
         src={props.src} 
         alt="profile picture" 
-        layout="fixed"
         height={size} 
         width={size} />
 

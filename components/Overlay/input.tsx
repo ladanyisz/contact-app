@@ -1,14 +1,12 @@
 import styles from './input.module.css';
 
-interface Props {
-    placeholder?: string;
-}
 
-const Input = (props: Props) => {
+
+const Input = (props) => {
     return (
         <input
+            {...props}
             className={`G-80 ${styles.input} primary`}
-            placeholder={props.placeholder}
         />
     );
 };

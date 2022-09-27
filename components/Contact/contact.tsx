@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { ButtonType, ButtonVariation } from '../../models/ButtonType';
 import { IContact } from '../../models/Contact';
@@ -10,9 +10,14 @@ import ListItem from '../Dropdown/list-item';
 import ProfilePic from '../ProfilePic/profile-pic';
 import styles from './contact.module.css';
 
-const Contact = (props: { contact: IContact }) => {
-    const contact = props.contact;
+interface Props {
+    contact: IContact;
+    editClicked: (contact: IContact) => void;
+}
 
+const Contact = (props: Props) => {
+
+    const [contact, setContact] = useState(props.contact);
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const dropdownDivRef = useRef(null);
 
@@ -34,6 +39,10 @@ const Contact = (props: { contact: IContact }) => {
         document.addEventListener('mousedown', closeDropdownMenu);
     });
 
+    const handleEditClick = () => {
+        setDropdownVisible(false);
+        props.editClicked(contact);
+    };
 
     return (
         <div className={`d-flex ${styles.contactItem}`}>
@@ -85,6 +94,7 @@ const Contact = (props: { contact: IContact }) => {
                             icon='/icons/Settings.svg'
                             alt='Edit'
                             label='Edit'
+                            onEditClick={handleEditClick}
                         />
                         <Dropdown.Item
                             as={ListItem}
