@@ -1,0 +1,24 @@
+.input,
+.input:focus-visible {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--G-60);
+    border-radius: 8px;
+    outline: none;
+}
+
+.input:hover {
+    border-color: var(--G-30);
+}
+
+.input:focus-visible {
+    background-color: var(--G-60);
+    border-color: var(--G-10);
+}
+
+.input::placeholder,
+.input::-ms-input-placeholder,
+.input:ms-input-placeholder {
+    color: rgba(255, 255, 255, 0.32);
+    opacity: 1;
+}

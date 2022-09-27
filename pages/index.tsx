@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Contacts from '../components/contacts';
+import Contacts from '../components/Contacts/contacts';
 import styles from '../styles/Home.module.css';
 
 export default function Home() {

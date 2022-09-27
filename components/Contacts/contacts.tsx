@@ -1,6 +1,9 @@
 import { Fragment } from "react";
-import { IContact } from "../models/Contact";
-import Contact from "./Contact/contact";
+import { IContact } from "../../models/Contact";
+import Contact from "../Contact/contact";
+import AddContactOverlay from "../Overlay/add-contact-overlay";
+import ContactsHeader from "./contacts-header";
+
 
 
 const CONTACTS: IContact[] = [
@@ -24,11 +27,12 @@ const CONTACTS: IContact[] = [
 const Contacts = () => {
     return (
         <Fragment>
-            <h1>Contacts</h1>
+            <ContactsHeader />
             <ul>
                 {CONTACTS.map(contact => 
                 <Contact key={contact.name} contact={contact}/>)}
             </ul>
+            <AddContactOverlay show={true} />
         </Fragment>
     );
 }

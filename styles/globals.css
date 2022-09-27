@@ -9,7 +9,6 @@
   --G-30: #373737;
   --G-20: #3C3C3C;
   --G-10: #414141;
-  
   --primary: #FFFFFF;
   --secondary: rgba(255, 255, 255, 0.56);
   --disabled: rgba(255, 255, 255, 0.32);
@@ -49,7 +48,7 @@ h1 {
 
 h2 {
   font-family: 'Glysa';
-  font-weight: bolder;
+  font-weight: 500;
   font-size: 24px;
   line-height: 40px;
 }
