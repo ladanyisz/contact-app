@@ -5,3 +5,12 @@ export interface IContact {
     phoneNum: string;
     email: string;
 }
+
+export const defaultProfilePicture = '/images/Default.png';
+export const emptyContact = {
+    id: '',
+    name: '',
+    image: defaultProfilePicture,
+    phoneNum: '',
+    email: '',
+};

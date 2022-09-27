@@ -1,34 +1,16 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useContext, useState } from 'react';
+import ContactsContext from '../../context/ContactsContext';
+import ContactsProvider from '../../context/ContactsProvider';
 import { IContact } from '../../models/Contact';
+import { ContactChangeMode } from '../../models/ContactChangeMode';
 import Contact from '../Contact/contact';
-import ContactOverlay, { ContactChangeMode } from '../Overlay/contact-overlay';
+import ContactOverlay from '../Overlay/contact-overlay';
 import ContactsHeader from './contacts-header';
 
-const CONTACTS: IContact[] = [
-    {
-        id: '1',
-        name: 'Timothy Lewis',
-        image: '/images/Timothy.png',
-        phoneNum: '+36 01 234 5678',
-        email: 'timothy@mail.com'
-    },
-    {
-        id: '2',
-        name: 'Sarah Wright',
-        image: '/images/Sarah.png',
-        phoneNum: '+36 01 234 5678',
-        email: 'sarah@mail.com'
-    },
-    {
-        id: '3',
-        name: 'Lucy Jones',
-        image: '/images/Lucy.png',
-        phoneNum: '+36 01 234 5678',
-        email: 'lucy@mail.com'
-    },
-];
 
 const Contacts = () => {
+    const contactsCtx = useContext(ContactsContext);
+
     const [showOverlay, setShowOverlay] = useState(false);
     const [overlayMode, setOverlayMode] = useState<ContactChangeMode>('new');
     const [contact, setContact] = useState(null);
@@ -51,7 +33,7 @@ const Contacts = () => {
         <Fragment>
             <ContactsHeader addNewClicked={handleAddNewClicked} />
             <ul>
-                {CONTACTS.map((contact) => (
+                {contactsCtx.contacts.map((contact) => (
                     <Contact
                         key={contact.name}
                         contact={contact}

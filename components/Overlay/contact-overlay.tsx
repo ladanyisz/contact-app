@@ -1,14 +1,14 @@
-import React, { ChangeEvent, Fragment, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
 import { ButtonType, ButtonVariation } from '../../models/ButtonType';
 import { ProfilePicSize } from '../../models/ProfilePicSize';
 import Button from '../Button/button';
 import ProfilePic from '../ProfilePic/profile-pic';
 import Input from './input';
-import { IContact } from '../../models/Contact';
+import { defaultProfilePicture, emptyContact, IContact } from '../../models/Contact';
 
 import styles from './contact-overlay.module.css';
-
-export type ContactChangeMode = 'edit' | 'new';
+import { ContactChangeMode } from '../../models/ContactChangeMode';
+import ContactsContext from '../../context/ContactsContext';
 
 interface Props {
     show: boolean;
@@ -18,29 +18,29 @@ interface Props {
 }
 
 const ContactOverlay = (props: Props) => {
-    const defaultProfilePicture = '/images/Default.png';
 
-    const [contactDetails, setContactDetails] = useState<IContact>({
-        id: '',
-        name: '',
-        image: defaultProfilePicture,
-        phoneNum: '',
-        email: ''
-    });
+    const contactsCtx = useContext(ContactsContext);
+
+    
+    const [contactDetails, setContactDetails] = useState<IContact>(emptyContact);
 
     const [profilePicChosen, setProfilePicChosen] = useState(false);
     const overlayRef = useRef(null);
 
     const {contact} = props;
     const {mode} = props;
+    const {show} = props;
     useEffect(() => {
         if (mode === 'edit') {
             setContactDetails(contact);
+        } else {
+            setContactDetails(emptyContact);
         }
-    }, [mode]);
+    }, [mode, contact, show]);
 
     const closeOverlay = () => {
         props.onClose();
+        setContactDetails(emptyContact);
     };
 
     const handleBackdropClick = (e: React.MouseEvent<HTMLElement>) => {
@@ -100,8 +100,17 @@ const ContactOverlay = (props: Props) => {
         })
     }
 
+    const onDoneClicked = () => {
+        if (mode === 'new') {
+            contactsCtx.addNewContact(contactDetails);
+        } else if (mode === 'edit') {
+            contactsCtx.editContact(contactDetails);
+        }
+        closeOverlay();
+    }
+
     let title = 'Add';
-    if (props.mode === 'edit') title = 'Edit';
+    if (mode === 'edit') title = 'Edit';
 
     const defaultButtons = (
         <Button
@@ -179,6 +188,7 @@ const ContactOverlay = (props: Props) => {
                         btnType={ButtonType.Primary}
                         btnVariation={ButtonVariation.Text}
                         label='Done'
+                        onClickHandler={onDoneClicked}
                     />
                 </div>
             </div>

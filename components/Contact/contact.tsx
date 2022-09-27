@@ -1,5 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { Dropdown } from 'react-bootstrap';
+import ContactsContext from '../../context/ContactsContext';
 import { ButtonType, ButtonVariation } from '../../models/ButtonType';
 import { IContact } from '../../models/Contact';
 import { ProfilePicSize } from '../../models/ProfilePicSize';
@@ -16,6 +17,8 @@ interface Props {
 }
 
 const Contact = (props: Props) => {
+
+    const contactsContext = useContext(ContactsContext);
 
     const [contact, setContact] = useState(props.contact);
     const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -43,6 +46,10 @@ const Contact = (props: Props) => {
         setDropdownVisible(false);
         props.editClicked(contact);
     };
+    
+    const handleRemoveClick = () => {
+        contactsContext.deleteContact(contact.id);
+    }
 
     return (
         <div className={`d-flex ${styles.contactItem}`}>
@@ -94,7 +101,7 @@ const Contact = (props: Props) => {
                             icon='/icons/Settings.svg'
                             alt='Edit'
                             label='Edit'
-                            onEditClick={handleEditClick}
+                            handleClick={handleEditClick}
                         />
                         <Dropdown.Item
                             as={ListItem}
@@ -107,6 +114,7 @@ const Contact = (props: Props) => {
                             icon='/icons/Delete.svg'
                             alt='Remove'
                             label='Remove'
+                            handleClick={handleRemoveClick}
                         />
                     </Dropdown.Menu>
                 </Dropdown>

@@ -7,14 +7,14 @@ interface Props {
     icon: string;
     alt: string;
     label: string;
-    onEditClick?: () => void;
+    handleClick?: () => void;
 }
 
 const ListItem = React.forwardRef<HTMLElement, Props>((props, ref) => {
 
 
     return (
-        <span className={styles.listItem} onClick={props.onEditClick}>
+        <span className={styles.listItem} onClick={props.handleClick}>
             <ListItemIcon src={props.icon} alt={props.alt}/> <span>{props.label}</span>
         </span>
     );
