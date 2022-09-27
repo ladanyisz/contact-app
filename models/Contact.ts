@@ -8,7 +8,7 @@ export interface IContact {
 
 export const defaultProfilePicture = '/images/Default.png';
 export const emptyContact = {
-    id: '',
+    id: null,
     name: '',
     image: defaultProfilePicture,
     phoneNum: '',

@@ -59,6 +59,7 @@ const ContactOverlay = (props: Props) => {
                 return {
                     ...prevState,
                     image: URL.createObjectURL(event.target.files[0]),
+
                 };
             });
             setProfilePicChosen(true);

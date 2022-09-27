@@ -4,47 +4,37 @@ import ContactsContext, { ContextData } from './ContactsContext';
 
 const ContactsProvider = (props) => {
     const [contextData, setContextData] = useState<ContextData>({
-        contacts: [
-            {
-                id: '1',
-                name: 'Timothy Lewis',
-                image: '/images/Timothy.png',
-                phoneNum: '+36 01 234 5678',
-                email: 'timothy@mail.com',
-            },
-            {
-                id: '2',
-                name: 'Sarah Wright',
-                image: '/images/Sarah.png',
-                phoneNum: '+36 01 234 5678',
-                email: 'sarah@mail.com',
-            },
-            {
-                id: '3',
-                name: 'Lucy Jones',
-                image: '/images/Lucy.png',
-                phoneNum: '+36 01 234 5678',
-                email: 'lucy@mail.com',
-            },
-        ],
+        contacts: [],
         mode: 'new',
     });
 
-    const addContact = (contact: IContact) => {
-        setContextData((prevState) => {
-            const newContacts = prevState.contacts;
-            newContacts.push({
-                ...contact,
-                id: (+prevState.contacts[prevState.contacts.length - 1]
-                    .id).toString(),
-            });
-            return {
-                mode: prevState.mode,
-                contacts: newContacts
-            };
-        });
-        // TODO: backend
+    const _addContact = async (contact: IContact) => {
+        const response = await fetch('/api/addContact', {
+            method: 'POST',
+            body: JSON.stringify(contact)
+        })
+
+        if (!response.ok) {
+            throw new Error(response.statusText);
+        }
+        console.log(response);
+        return await response.json();
     };
+
+    const addContact = async (contact: IContact) => {
+        try {
+            const newContact = await _addContact(contact);
+            setContextData((prevState) => {
+                return {
+                    mode: prevState.mode,
+                    contacts: [...prevState.contacts, newContact]
+                }
+            })
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
 
     const editContact = (_contact: IContact) => {
         setContextData((prevState) => {
@@ -70,9 +60,19 @@ const ContactsProvider = (props) => {
         // TODO: backend
     }
 
+    const setUpContacts = (contacts: IContact[]) => {
+        setContextData(() => {
+            return {
+                mode: 'new',
+                contacts: contacts
+            };
+        })
+    }
+
     const contactsContext = {
         contacts: contextData.contacts,
         mode: contextData.mode,
+        setUpContacts: setUpContacts,
         addNewContact: addContact,
         editContact: editContact,
         deleteContact: deleteContact

@@ -33,7 +33,8 @@ const Contacts = () => {
         <Fragment>
             <ContactsHeader addNewClicked={handleAddNewClicked} />
             <ul>
-                {contactsCtx.contacts.map((contact) => (
+                {contactsCtx.contacts &&
+                contactsCtx.contacts.map((contact) => (
                     <Contact
                         key={contact.name}
                         contact={contact}

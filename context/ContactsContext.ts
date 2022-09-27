@@ -10,6 +10,7 @@ export interface ContextData {
 const ContactsContext = createContext({
     contacts: [],
     mode: "new",
+    setUpContacts: (contacts: IContact[]) => {},
     addNewContact: (contact: IContact) => {},
     editContact: (contact: IContact) => {},
     deleteContact: (id: string) => {}

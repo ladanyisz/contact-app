@@ -1,8 +1,34 @@
 import Head from 'next/head';
+import { useContext, useEffect, useState } from 'react';
 import Contacts from '../components/Contacts/contacts';
+import ContactsContext from '../context/ContactsContext';
 import styles from '../styles/Home.module.css';
 
-export default function Home() {
+import {prisma} from '../db';
+
+
+export async function getServerSideProps() {
+    const contacts = await prisma.contact.findMany();
+    
+    return {
+        props: {
+            contacts: contacts,
+        },
+    };
+}
+
+export default function Home(props) {
+    // console.log(contacts);
+    const contactCtx = useContext(ContactsContext);
+    const [contacts, setContacts] = useState(props.contacts);
+
+    useEffect(() => {
+        console.log(contacts);
+        
+        contactCtx.setUpContacts(contacts);
+    }, [contacts]);
+
+
     return (
         <div>
             <Head>
