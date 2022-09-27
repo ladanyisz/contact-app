@@ -3,7 +3,16 @@ import Button from '../Button/button';
 
 import styles from './contacts-header.module.css';
 
-const ContactsHeader = () => {
+interface Props {
+    addNewClicked: () => void;
+}
+
+const ContactsHeader = (props: Props) => {
+
+    const addNewHandler = () => {
+        props.addNewClicked();
+    }
+
     return (
         <div className={styles.contactsHeader}>
             <h1>Contacts</h1>
@@ -23,6 +32,7 @@ const ContactsHeader = () => {
                     btnVariation={ButtonVariation.IconAndText}
                     icon='/icons/Add.svg'
                     label='Add new'
+                    onClickHandler={addNewHandler}
                 />
             </div>
         </div>

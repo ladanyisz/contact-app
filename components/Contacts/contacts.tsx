@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { IContact } from "../../models/Contact";
 import Contact from "../Contact/contact";
 import AddContactOverlay from "../Overlay/add-contact-overlay";
@@ -25,14 +25,22 @@ const CONTACTS: IContact[] = [
 ];
 
 const Contacts = () => {
+    const [showOverlay, setShowOverlay] = useState(false);
+    const handleOnClose = () => {
+        setShowOverlay(false);
+    }
+    const handleOnOpen = () => {
+        setShowOverlay(true);
+    }
+
     return (
         <Fragment>
-            <ContactsHeader />
+            <ContactsHeader addNewClicked={handleOnOpen} />
             <ul>
                 {CONTACTS.map(contact => 
                 <Contact key={contact.name} contact={contact}/>)}
             </ul>
-            <AddContactOverlay show={true} />
+            <AddContactOverlay onClose={handleOnClose} show={showOverlay} />
         </Fragment>
     );
 }

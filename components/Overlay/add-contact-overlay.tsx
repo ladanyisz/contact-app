@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import React, { ChangeEvent, Fragment, useRef, useState } from 'react';
 import { ButtonType, ButtonVariation } from '../../models/ButtonType';
 import { ProfilePicSize } from '../../models/ProfilePicSize';
 import Button from '../Button/button';
@@ -8,11 +8,42 @@ import Input from './input';
 
 interface Props {
     show: boolean;
+    onClose: () => void;
 }
 
 const AddContactOverlay = (props: Props) => {
-    const [picSrc, setPicSrc] = useState('/images/Default.png');
-    const [profilePicChosen, setProfilePicChosen] = useState(true);
+    const defaultProfilePicture = '/images/Default.png';
+    const [picSrc, setPicSrc] = useState(defaultProfilePicture);
+    const [profilePicChosen, setProfilePicChosen] = useState(false);
+    const overlayRef = useRef(null);
+
+    const closeOverlay = () => {
+        props.onClose();
+    };
+
+    const handleBackdropClick = (e: React.MouseEvent<HTMLElement>) => {
+        if (
+            overlayRef.current &&
+            props.show &&
+            !overlayRef.current.contains(e.target)
+        ) {
+            closeOverlay();
+        }
+    };
+
+    const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files.length > 0) {
+            setPicSrc(() =>
+                URL.createObjectURL(event.target.files[0])
+            );
+            setProfilePicChosen(true);
+        }
+    };
+
+    const deletePic = () => {
+        setPicSrc(defaultProfilePicture);
+        setProfilePicChosen(false);
+    }
 
     const defaultButtons = (
         <Button
@@ -20,6 +51,8 @@ const AddContactOverlay = (props: Props) => {
             btnVariation={ButtonVariation.IconAndText}
             icon='/icons/Add.svg'
             label='Add picture'
+            type='file'
+            onFileChange={handleFileChange}
         />
     );
 
@@ -30,18 +63,26 @@ const AddContactOverlay = (props: Props) => {
                 btnVariation={ButtonVariation.IconAndText}
                 icon='/icons/Change.svg'
                 label='Change picture'
+                type='file'
+                onFileChange={handleFileChange}
             />
             <Button
                 btnType={ButtonType.Primary}
                 btnVariation={ButtonVariation.Icon}
                 icon='/icons/Delete.svg'
+                onClickHandler={deletePic}
             />
         </div>
     );
 
     return (
-        <div className={`${styles.backdrop} ${props.show ? 'show' : 'hide'}`}>
-            <div className={`${styles.overlay} G-100`}>
+        <div
+            className={`${styles.backdrop} ${
+                props.show ? styles.show : styles.hide
+            }`}
+            onClick={handleBackdropClick}
+        >
+            <div className={`${styles.overlay} G-100`} ref={overlayRef}>
                 <div className={styles.info}>
                     <h2>Add contact</h2>
                     <div className={styles.infoButtons}>
@@ -71,6 +112,7 @@ const AddContactOverlay = (props: Props) => {
                         btnType={ButtonType.Secondary}
                         btnVariation={ButtonVariation.Text}
                         label='Cancel'
+                        onClickHandler={closeOverlay}
                     />
                     <Button
                         btnType={ButtonType.Primary}
