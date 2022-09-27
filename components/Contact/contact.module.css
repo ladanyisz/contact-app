@@ -14,7 +14,7 @@
     display: none;
 }
 
-.contactItem:hover .actionButtons {
+.contactItem:hover .actionButtons, .actionButtons.actionButtonsVisible {
     display: flex;
     align-items: center;
     gap: 8px;

@@ -1,4 +1,5 @@
-import { Dropdown } from 'react-bootstrap';
+import React, { useRef, useState } from 'react';
+import Dropdown from 'react-bootstrap/Dropdown'
 import { ButtonType, ButtonVariation } from '../../models/ButtonType';
 import { IContact } from '../../models/Contact';
 import { ProfilePicSize } from '../../models/ProfilePicSize';
@@ -12,7 +13,27 @@ import styles from './contact.module.css';
 
 const Contact = (props: { contact: IContact }) => {
     const contact = props.contact;
-    const altMessage = 'profile picture of ' + contact.name;
+
+    const [dropdownVisible, setDropdownVisible] = useState(false);
+    const dropdownDivRef = useRef(null)
+
+    const handleDropdownClick = (e: React.MouseEvent<HTMLElement>) => {
+        console.log('here');
+        console.log(e);
+        
+        
+        setDropdownVisible((prevState) => !prevState);
+        console.log(dropdownVisible);
+        
+    }
+
+    const closeDropdownMenu = (e: Event) => {
+        if (dropdownDivRef.current && dropdownVisible && !dropdownDivRef.current.contains(e.target)) {
+            setDropdownVisible(false);
+        }
+    }
+
+    document.addEventListener('mousedown', closeDropdownMenu);
 
     return (
         <div className={`d-flex ${styles.contactItem}`}>
@@ -26,7 +47,7 @@ const Contact = (props: { contact: IContact }) => {
                 </div>
             </div>
 
-            <div className={styles.actionButtons}>
+            <div className={`${styles.actionButtons} ${dropdownVisible ? styles.actionButtonsVisible : ''}`} ref={dropdownDivRef}>
                 <Button
                     btnType={ButtonType.Secondary}
                     btnVariation={ButtonVariation.Icon}
@@ -39,15 +60,8 @@ const Contact = (props: { contact: IContact }) => {
                     icon='/icons/Call.svg'
                     alt='Call'
                 />
-                {/* <Button
-                    btnType={ButtonType.Secondary}
-                    btnVariation={ButtonVariation.Icon}
-                    icon='/icons/More.svg'
-                    alt='More'
-                    data-bs-toggle="dropdown" aria-expanded="false"
-                /> */}
                 <Dropdown>
-                    <Dropdown.Toggle as={DropdownButton}>
+                    <Dropdown.Toggle as={DropdownButton} onClick={handleDropdownClick}>
                         <Button
                             btnType={ButtonType.Secondary}
                             btnVariation={ButtonVariation.Icon}
@@ -56,7 +70,7 @@ const Contact = (props: { contact: IContact }) => {
                             data-bs-toggle="dropdown" aria-expanded="false"
                         />
                     </Dropdown.Toggle>
-                    <Dropdown.Menu as={List}>
+                    <Dropdown.Menu as={List} show={dropdownVisible} >
                         <Dropdown.Item as={ListItem} icon="/icons/Settings.svg" alt='Edit' label='Edit'/>
                         <Dropdown.Item as={ListItem} icon="/icons/Favourite.svg" alt='Favourite' label='Favourite'/>
                         <Dropdown.Item as={ListItem} icon="/icons/Delete.svg" alt='Remove' label='Remove'/>
