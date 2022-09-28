@@ -9,13 +9,13 @@ const ContactsProvider = (props) => {
 
     const changeMode = (newMode: ContactChangeMode) => {
         setMode(newMode);
-    }
+    };
 
     const trimContactData = (contact: IContact) => {
         contact.name = contact.name.trim();
         contact.phoneNum = contact.phoneNum.trim();
         contact.email = contact.email.trim();
-    }
+    };
 
     const _addContact = async (contact: IContact) => {
         const response = await fetch('/api/addContact', {
@@ -42,7 +42,7 @@ const ContactsProvider = (props) => {
     const _editContact = async (contact: IContact) => {
         const response = await fetch('/api/editContact', {
             method: 'POST',
-            body: JSON.stringify(contact)
+            body: JSON.stringify(contact),
         });
 
         if (!response.ok) {
@@ -57,18 +57,36 @@ const ContactsProvider = (props) => {
             await _editContact(contact);
             setContacts((prevState) => {
                 const allContacts = prevState;
-                const cont = allContacts.find(c => c.id === contact.id);
+                const cont = allContacts.find((c) => c.id === contact.id);
                 Object.assign(cont, contact);
                 return [...allContacts];
             });
         } catch (error) {
-            console.log(error);   
+            console.log(error);
         }
     };
 
-    const deleteContact = (id: string) => {
-        
-        // TODO: backend
+    const _deleteContact = async (id: string) => {
+        const response = await fetch('/api/deleteContact', {
+            method: 'POST',
+            body: JSON.stringify(id),
+        });
+
+        if (!response.ok) {
+            throw new Error(response.statusText);
+        }
+        return await response.json();
+    };
+
+    const deleteContact = async (id: string) => {
+        try {
+            await _deleteContact(id);
+            setContacts((prevState) => {
+                return [...prevState.filter((contact) => contact.id !== id)];
+            });
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const setUpContacts = (contacts: IContact[]) => {
