@@ -4,6 +4,10 @@
     padding: 12px 0;
 }
 
+.contactItem:first-of-type {
+    padding-top: 0;
+}
+
 .info {
     align-items: center;
     padding: 0px;

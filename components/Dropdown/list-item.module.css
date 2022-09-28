@@ -4,11 +4,10 @@
     align-items: center;
     padding: 12px 10px;
     gap: 12px;
-
     width: 219px;
     height: 44px;
-
     background-color: var(--G-80);
+    user-select: none;
 }
 
 .listItem:hover {

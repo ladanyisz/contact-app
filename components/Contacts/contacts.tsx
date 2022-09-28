@@ -1,12 +1,12 @@
 import { Fragment, useContext, useState } from 'react';
 import ContactsContext from '../../context/ContactsContext';
-import ContactsProvider from '../../context/ContactsProvider';
 import { IContact } from '../../models/Contact';
 import { ContactChangeMode } from '../../models/ContactChangeMode';
 import Contact from '../Contact/contact';
 import ContactOverlay from '../Overlay/contact-overlay';
 import ContactsHeader from './contacts-header';
 
+import styles from './contacts.module.css';
 
 const Contacts = () => {
     const contactsCtx = useContext(ContactsContext);
@@ -32,22 +32,26 @@ const Contacts = () => {
     return (
         <Fragment>
             <ContactsHeader addNewClicked={handleAddNewClicked} />
-            <ul>
-                {contactsCtx.contacts &&
-                contactsCtx.contacts.map((contact) => (
-                    <Contact
-                        key={contact.name}
-                        contact={contact}
-                        editClicked={handleEditClicked}
-                    />
-                ))}
-            </ul>
-            <ContactOverlay
-                onClose={handleOnClose}
-                show={showOverlay}
-                mode={overlayMode}
-                contact={contact}
-            />
+            <div></div>
+            <div>
+                <ul className={styles.ul}>
+                    {contactsCtx.contacts &&
+                    contactsCtx.contacts.map((contact) => (
+                        <Contact
+                            key={contact.name}
+                            contact={contact}
+                            editClicked={handleEditClicked}
+                        />
+                    ))}
+                </ul>
+                <ContactOverlay
+                    onClose={handleOnClose}
+                    show={showOverlay}
+                    mode={overlayMode}
+                    contact={contact}
+                />
+            </div>
+            <div></div>
         </Fragment>
     );
 };

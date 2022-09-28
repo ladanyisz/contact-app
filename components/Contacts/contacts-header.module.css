@@ -11,3 +11,8 @@
     padding: 0px;
     gap: 1rem;
 }
+
+.backDiv {
+    display: flex;
+    justify-content: flex-end;
+}

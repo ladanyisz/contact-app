@@ -1,8 +1,7 @@
 import Head from 'next/head';
-import { useContext, useEffect, useState } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import Contacts from '../components/Contacts/contacts';
 import ContactsContext from '../context/ContactsContext';
-import styles from '../styles/Home.module.css';
 
 import {prisma} from '../db';
 
@@ -18,7 +17,6 @@ export async function getServerSideProps() {
 }
 
 export default function Home(props) {
-    // console.log(contacts);
     const contactCtx = useContext(ContactsContext);
     const [contacts, setContacts] = useState(props.contacts);
 
@@ -28,7 +26,7 @@ export default function Home(props) {
 
 
     return (
-        <div>
+        <Fragment>
             <Head>
                 <title>Create Next App</title>
                 <meta
@@ -38,19 +36,15 @@ export default function Home(props) {
                 <link rel='icon' href='/favicon.ico' />
             </Head>
 
-            <main className={`${styles.main}`}>
+            <main className='main'>
                 <div></div>
                 <div></div>
                 <div></div>
 
-                <div></div>
-                <div>
-                    <Contacts />
-                </div>
-                <div></div>
+                <Contacts />
             </main>
 
             <footer></footer>
-        </div>
+        </Fragment>
     );
 }

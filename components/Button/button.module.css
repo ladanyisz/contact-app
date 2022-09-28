@@ -5,6 +5,7 @@
     align-items: center;
     gap: 8px;
     color: var(--primary);
+    user-select: none;
 }
 
 /* Icon and Text */

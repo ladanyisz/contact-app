@@ -1,129 +1,155 @@
 :root {
-  --G-100: #141414;
-  --G-90: #191919;
-  --G-80: #1E1E1E;
-  --G-70: #232323;
-  --G-60: #282828;
-  --G-50: #2D2D2D;
-  --G-40: #323232;
-  --G-30: #373737;
-  --G-20: #3C3C3C;
-  --G-10: #414141;
-  --primary: #FFFFFF;
-  --secondary: rgba(255, 255, 255, 0.56);
-  --disabled: rgba(255, 255, 255, 0.32);
+    --G-100: #141414;
+    --G-90: #191919;
+    --G-80: #1e1e1e;
+    --G-70: #232323;
+    --G-60: #282828;
+    --G-50: #2d2d2d;
+    --G-40: #323232;
+    --G-30: #373737;
+    --G-20: #3c3c3c;
+    --G-10: #414141;
+    --primary: #ffffff;
+    --secondary: rgba(255, 255, 255, 0.56);
+    --disabled: rgba(255, 255, 255, 0.32);
 }
 
 @font-face {
-  font-family: 'Glysa';
-  src: url('../assets/fonts/Glysa.otf') format('opentype');
+    font-family: 'Glysa';
+    src: url('../assets/fonts/Glysa.otf') format('opentype');
 }
 
 @font-face {
-  font-family: 'Lexend Deca';
-  src: url('../assets/fonts/LexendDeca-VariableFont_wght.ttf');
+    font-family: 'Lexend Deca';
+    src: url('../assets/fonts/LexendDeca-VariableFont_wght.ttf');
 }
 
 html,
 body {
-  padding: 0;
-  margin: 0;
-  background-color: var(--G-100);
-  color: var(--primary);
-  font-family: 'Lexend Deca';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0.01em;
+    padding: 0;
+    margin: 0;
+    background-color: var(--G-100);
+    color: var(--primary);
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.01em;
+    height: 100%;
+}
+
+body > div {
+    height: 100%;
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
 }
 
 h1 {
-  font-family: 'Glysa';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 40px;
+    font-family: 'Glysa';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 40px;
 }
 
 h2 {
-  font-family: 'Glysa';
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 40px;
+    font-family: 'Glysa';
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 40px;
 }
 
 h3 {
-  font-family: 'Lexend Deca';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.01em;
-  margin: 0;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.01em;
+    margin: 0;
 }
 
 .message {
-  font-family: 'Lexend Deca';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 0.01em;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.01em;
 }
 
 .G-100 {
-  background-color: var(--G-100);
+    background-color: var(--G-100);
 }
 
 .G-90 {
-  background-color: var(--G-90);
+    background-color: var(--G-90);
 }
 
 .G-80 {
-  background-color: var(--G-80);
+    background-color: var(--G-80);
 }
 
 .G-70 {
-  background-color: var(--G-70);
+    background-color: var(--G-70);
 }
 
 .G-60 {
-  background-color: var(--G-60);
+    background-color: var(--G-60);
 }
 
 .G-50 {
-  background-color: var(--G-50);
+    background-color: var(--G-50);
 }
 
 .G-40 {
-  background-color: var(--G-40);
+    background-color: var(--G-40);
 }
 
 .G-30 {
-  background-color: var(--G-30);
+    background-color: var(--G-30);
 }
 
 .G-20 {
-  background-color: var(--G-20);
+    background-color: var(--G-20);
 }
 
 .G-10 {
-  background-color: var(--G-10);
+    background-color: var(--G-10);
 }
 
 .primary {
-  color: var(--primary);
+    color: var(--primary);
 }
 
 .secondary {
-  color: var(--secondary);
+    color: var(--secondary);
 }
 
 .disabled {
-  color: var(--disabled);
+    color: var(--disabled);
 }
 
 .dropdown-menu {
-  color: var(--primary);
+    color: var(--primary);
+}
+
+.main {
+    display: grid;
+    grid-template-columns: minmax(23%, 1fr) minmax(auto, 960px) minmax(23%,1fr);
+    grid-template-rows: 10vh 10vh auto;
+    grid-template-rows: 10vh 10vh auto;
+    height: 100%;
+    border-collapse: collapse;
+}
+
+.main > * {
+    border: 1px solid var(--G-60);
+    border-collapse: collapse;
+    padding: 24px;
 }
