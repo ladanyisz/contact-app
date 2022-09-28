@@ -23,8 +23,6 @@ export default function Home(props) {
     const [contacts, setContacts] = useState(props.contacts);
 
     useEffect(() => {
-        console.log(contacts);
-        
         contactCtx.setUpContacts(contacts);
     }, [contacts]);
 

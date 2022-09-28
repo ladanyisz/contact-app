@@ -4,12 +4,10 @@ import { ContactChangeMode } from "../models/ContactChangeMode";
 
 export interface ContextData {
     contacts: IContact[];
-    mode: ContactChangeMode;
 }
 
 const ContactsContext = createContext({
     contacts: [],
-    mode: "new",
     setUpContacts: (contacts: IContact[]) => {},
     addNewContact: (contact: IContact) => {},
     editContact: (contact: IContact) => {},

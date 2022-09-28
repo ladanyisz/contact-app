@@ -5,11 +5,6 @@ import ContactsContext, { ContextData } from './ContactsContext';
 
 const ContactsProvider = (props) => {
     const [contacts, setContacts] = useState<IContact[]>([]);
-    const [mode, setMode] = useState<ContactChangeMode>('new');
-
-    const changeMode = (newMode: ContactChangeMode) => {
-        setMode(newMode);
-    };
 
     const trimContactData = (contact: IContact) => {
         contact.name = contact.name.trim();
@@ -95,7 +90,6 @@ const ContactsProvider = (props) => {
 
     const contactsContext = {
         contacts: contacts,
-        mode: mode,
         setUpContacts: setUpContacts,
         addNewContact: addContact,
         editContact: editContact,
