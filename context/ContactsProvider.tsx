@@ -1,81 +1,87 @@
 import { useState } from 'react';
 import { IContact } from '../models/Contact';
+import { ContactChangeMode } from '../models/ContactChangeMode';
 import ContactsContext, { ContextData } from './ContactsContext';
 
 const ContactsProvider = (props) => {
-    const [contextData, setContextData] = useState<ContextData>({
-        contacts: [],
-        mode: 'new',
-    });
+    const [contacts, setContacts] = useState<IContact[]>([]);
+    const [mode, setMode] = useState<ContactChangeMode>('new');
+
+    const changeMode = (newMode: ContactChangeMode) => {
+        setMode(newMode);
+    }
+
+    const trimContactData = (contact: IContact) => {
+        contact.name = contact.name.trim();
+        contact.phoneNum = contact.phoneNum.trim();
+        contact.email = contact.email.trim();
+    }
 
     const _addContact = async (contact: IContact) => {
         const response = await fetch('/api/addContact', {
             method: 'POST',
-            body: JSON.stringify(contact)
-        })
+            body: JSON.stringify(contact),
+        });
 
         if (!response.ok) {
             throw new Error(response.statusText);
         }
-        console.log(response);
         return await response.json();
     };
 
     const addContact = async (contact: IContact) => {
         try {
+            trimContactData(contact);
             const newContact = await _addContact(contact);
-            setContextData((prevState) => {
-                return {
-                    mode: prevState.mode,
-                    contacts: [...prevState.contacts, newContact]
-                }
-            })
+            setContacts((prevState) => [...prevState, newContact]);
         } catch (error) {
             console.log(error);
-            
         }
-    }
+    };
 
-    const editContact = (_contact: IContact) => {
-        setContextData((prevState) => {
-            const contacts = prevState.contacts;
-            const contact = contacts.find(contact => contact.id === _contact.id);
-            Object.assign(contact, _contact);
-            return {
-                mode: prevState.mode,
-                contacts: contacts
-            }
+    const _editContact = async (contact: IContact) => {
+        const response = await fetch('/api/editContact', {
+            method: 'POST',
+            body: JSON.stringify(contact)
         });
-        
-        // TODO: backend
-    }
+
+        if (!response.ok) {
+            throw new Error(response.statusText);
+        }
+        return await response.json();
+    };
+
+    const editContact = async (contact: IContact) => {
+        trimContactData(contact);
+        try {
+            await _editContact(contact);
+            setContacts((prevState) => {
+                const allContacts = prevState;
+                const cont = allContacts.find(c => c.id === contact.id);
+                Object.assign(cont, contact);
+                return [...allContacts];
+            });
+        } catch (error) {
+            console.log(error);   
+        }
+    };
 
     const deleteContact = (id: string) => {
-        setContextData((prevState) => {
-            return {
-                mode: prevState.mode,
-                contacts: prevState.contacts.filter(contact => contact.id !== id)
-            };
-        });
+        
         // TODO: backend
-    }
+    };
 
     const setUpContacts = (contacts: IContact[]) => {
-        setContextData(() => {
-            return {
-                mode: 'new',
-                contacts: contacts
-            };
-        })
-    }
+        setContacts(contacts);
+    };
 
     const contactsContext = {
-        contacts: contextData.contacts,
-        mode: contextData.mode,
+        contacts: contacts,
+        mode: mode,
         setUpContacts: setUpContacts,
         addNewContact: addContact,
         editContact: editContact,
-        deleteContact: deleteContact
+        deleteContact: deleteContact,
     };
 
     return (

@@ -39,17 +39,23 @@ const ContactOverlay = (props: Props) => {
     const { contact } = props;
     const { mode } = props;
     const { show } = props;
+
     useEffect(() => {
         if (mode === 'edit') {
             setContactDetails(contact);
+            if (contact.image !== defaultProfilePicture) {
+                setProfilePicChosen(true);
+            }
         } else {
             setContactDetails(emptyContact);
+            setProfilePicChosen(false);
         }
     }, [mode, contact, show]);
 
     const closeOverlay = () => {
         props.onClose();
         setContactDetails(emptyContact);
+        setProfilePicChosen(false);
     };
 
     const handleBackdropClick = (e: React.MouseEvent<HTMLElement>) => {
@@ -71,7 +77,7 @@ const ContactOverlay = (props: Props) => {
                     return {
                         ...prevState,
                         // image: URL.createObjectURL(event.target.files[0]),
-                        image: reader.result,
+                        image: reader.result as string,
                     };
                 });
                 setProfilePicChosen(true);
