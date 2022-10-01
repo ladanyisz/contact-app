@@ -20,7 +20,7 @@ const Button = (props: Props) => {
     if (props.icon) {
         icon = (
             <Image
-                {...props}
+                className={props.className}
                 src={props.icon}
                 alt={props.alt}
                 layout='fixed'
