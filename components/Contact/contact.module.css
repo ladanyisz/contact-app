@@ -23,3 +23,11 @@
     align-items: center;
     gap: 8px;
 }
+
+@media only screen and (max-width: 768px) {
+    .contactItem .actionButtons {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+}

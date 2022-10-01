@@ -1,6 +1,6 @@
 .backdrop {
     z-index: 2;
-    position: absolute;
+    position: fixed;
     left: 0px;
     right: 0px;
     top: 0px;
@@ -38,6 +38,7 @@
     align-items: flex-start;
     padding: 0px;
     gap: 24px;
+    width: 318px;
 }
 
 .infoButtons {
@@ -71,4 +72,10 @@
     align-items: flex-start;
     gap: 8px;
     width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+    .overlay, .info {
+        width: 100%;
+    }
 }

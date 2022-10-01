@@ -145,11 +145,37 @@ h3 {
     grid-template-rows: 10vh 10vh auto;
     grid-template-rows: 10vh 10vh auto;
     height: 100%;
-    border-collapse: collapse;
+    background-color: var(--G-60);
+    gap: 1px;
 }
 
 .main > * {
-    border: 1px solid var(--G-60);
-    border-collapse: collapse;
     padding: 24px;
+    background-color: var(--G-100);
+}
+
+@media only screen and (max-width: 768px) {
+
+    .hideOnMobile {
+        display: none;
+    }
+
+    .main {
+        grid-template-columns: min-content auto min-content;
+        background-color: unset;
+        gap: 0;
+    }
+
+    .main > * {
+        padding: 12px;
+
+    }
+
+    .main >  .top {
+        display: none;
+    }
+
+    .main > div:nth-child(4), .main > div:nth-child(6) {
+        align-self: center;
+    }
 }

@@ -3,3 +3,14 @@
     list-style-type: none;
     padding: 0;
 }
+
+@media only screen and (max-width: 768px) {
+    .contactList {
+        grid-column: 1 / 4;
+        padding: 24px;
+        padding-top: 12px;
+        height: fit-content;
+        border-top: 1px solid var(--G-60);
+    }
+
+}

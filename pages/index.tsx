@@ -37,9 +37,9 @@ export default function Home(props) {
             </Head>
 
             <main className='main'>
-                <div></div>
-                <div></div>
-                <div></div>
+                <div className='top'></div>
+                <div className='top'></div>
+                <div className='top'></div>
 
                 <Contacts />
             </main>

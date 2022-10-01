@@ -32,8 +32,8 @@ const Contacts = () => {
     return (
         <Fragment>
             <ContactsHeader addNewClicked={handleAddNewClicked} />
-            <div></div>
-            <div>
+            <div className='hideOnMobile'></div>
+            <div className={styles.contactList}>
                 <ul className={styles.ul}>
                     {contactsCtx.contacts &&
                     contactsCtx.contacts.map((contact) => (
@@ -51,7 +51,7 @@ const Contacts = () => {
                     contact={contact}
                 />
             </div>
-            <div></div>
+            <div className='hideOnMobile'></div>
         </Fragment>
     );
 };

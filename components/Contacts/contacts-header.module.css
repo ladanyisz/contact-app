@@ -16,3 +16,21 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.addSmall {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    .buttonsDiv {
+        gap: 4px;
+    }
+
+    .addSmall {
+        display: initial;
+    }
+
+    .addBig {
+        display: none;
+    }
+}

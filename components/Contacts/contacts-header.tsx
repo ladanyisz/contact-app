@@ -35,13 +35,23 @@ const ContactsHeader = (props: Props) => {
                         btnVariation={ButtonVariation.Icon}
                         icon='/icons/Profile pic.svg'
                     />
-                    <Button
-                        btnType={ButtonType.Special}
-                        btnVariation={ButtonVariation.IconAndText}
-                        icon='/icons/Add.svg'
-                        label='Add new'
-                        onClickHandler={addNewHandler}
-                    />
+                    <span className={styles.addBig}>
+                        <Button
+                            btnType={ButtonType.Special}
+                            btnVariation={ButtonVariation.IconAndText}
+                            icon='/icons/Add.svg'
+                            label='Add new'
+                            onClickHandler={addNewHandler}
+                        />
+                    </span>
+                    <span className={styles.addSmall}>
+                        <Button
+                            btnType={ButtonType.Special}
+                            btnVariation={ButtonVariation.Icon}
+                            icon='/icons/Add.svg'
+                            onClickHandler={addNewHandler}
+                        />
+                    </span>
                 </div>
             </div>
             <div>

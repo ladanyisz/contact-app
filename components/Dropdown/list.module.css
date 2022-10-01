@@ -2,3 +2,9 @@
     padding: 0;
     background-color: transparent;
 }
+
+@media only screen and (max-width: 768px) {
+    .list {
+        inset: 0px 0px auto auto !important;  /* Bootstrap bug fix */
+    }
+}

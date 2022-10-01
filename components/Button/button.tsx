@@ -12,6 +12,7 @@ export interface Props {
     onClickHandler?: () => void;
     onFileChange?: (event: ChangeEvent<HTMLInputElement>) => void;
     type?: string;
+    className?: string
 }
 
 const Button = (props: Props) => {
@@ -19,6 +20,7 @@ const Button = (props: Props) => {
     if (props.icon) {
         icon = (
             <Image
+                {...props}
                 src={props.icon}
                 alt={props.alt}
                 layout='fixed'
