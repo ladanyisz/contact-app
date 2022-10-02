@@ -5,6 +5,7 @@ import ContactsContext, { ContextData } from './ContactsContext';
 
 const ContactsProvider = (props) => {
     const [contacts, setContacts] = useState<IContact[]>([]);
+    const [loading, setLoading] = useState(false);
 
     const trimContactData = (contact: IContact) => {
         contact.name = contact.name.trim();
@@ -13,10 +14,11 @@ const ContactsProvider = (props) => {
     };
 
     const _addContact = async (contact: IContact) => {
+        setLoading(true);
         const response = await fetch('/api/addContact', {
             method: 'POST',
             body: JSON.stringify(contact),
-        });
+        }).finally(() => setLoading(false));
 
         if (!response.ok) {
             throw new Error(response.statusText);
@@ -35,10 +37,11 @@ const ContactsProvider = (props) => {
     };
 
     const _editContact = async (contact: IContact) => {
+        setLoading(true);
         const response = await fetch('/api/editContact', {
             method: 'POST',
             body: JSON.stringify(contact),
-        });
+        }).finally(() => setLoading(false));
 
         if (!response.ok) {
             throw new Error(response.statusText);
@@ -62,10 +65,11 @@ const ContactsProvider = (props) => {
     };
 
     const _deleteContact = async (id: string) => {
+        setLoading(true);
         const response = await fetch('/api/deleteContact', {
             method: 'POST',
             body: JSON.stringify(id),
-        });
+        }).finally(() => setLoading(false));
 
         if (!response.ok) {
             throw new Error(response.statusText);
@@ -87,9 +91,10 @@ const ContactsProvider = (props) => {
     const setUpContacts = (contacts: IContact[]) => {
         setContacts(contacts);
     };
-
+ 
     const contactsContext = {
         contacts: contacts,
+        loading: loading,
         setUpContacts: setUpContacts,
         addNewContact: addContact,
         editContact: editContact,

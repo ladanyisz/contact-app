@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { Fragment, useContext, useEffect, useState } from 'react';
 import Contacts from '../components/Contacts/contacts';
+import Loading from '../components/Loading/loading';
 import ContactsContext from '../context/ContactsContext';
 
 import {prisma} from '../db';
@@ -22,6 +23,7 @@ export default function Home(props) {
 
     useEffect(() => {
         contactCtx.setUpContacts(contacts);
+        
     }, [contacts]);
 
 
@@ -35,6 +37,8 @@ export default function Home(props) {
                 />
                 <link rel='icon' href='/favicon.ico' />
             </Head>
+
+            <Loading loading={contactCtx.loading} />
 
             <main className='main'>
                 <div className='top'></div>
