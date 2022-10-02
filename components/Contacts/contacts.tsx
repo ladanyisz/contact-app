@@ -29,12 +29,16 @@ const Contacts = () => {
         setContact(_contact);
     };
 
+    const noContacts = (
+        <p className='text-center fs-5 mt-4'>No contacts found!</p>
+    );
+
     return (
         <Fragment>
             <ContactsHeader addNewClicked={handleAddNewClicked} />
             <div className='hideOnMobile'></div>
             <div className={styles.contactList}>
-                <ul className={styles.ul}>
+                {contactsCtx.contacts.length > 0 && <ul className={styles.ul}>
                     {contactsCtx.contacts &&
                     contactsCtx.contacts.map((contact) => (
                         <Contact
@@ -43,7 +47,8 @@ const Contacts = () => {
                             editClicked={handleEditClicked}
                         />
                     ))}
-                </ul>
+                </ul>}
+                {contactsCtx.contacts.length === 0 && noContacts}
                 <ContactOverlay
                     onClose={handleOnClose}
                     show={showOverlay}

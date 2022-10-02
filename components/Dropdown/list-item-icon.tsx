@@ -1,13 +1,15 @@
 import Image from "next/image";
 
+import styles from './list-item-icon.module.css';
+
 interface Props {
     src: string;
     alt: string;
 }
 
-// TODO: secondary color
 const ListItemIcon = (props: Props) => {
     return <Image 
+                className={styles.icon}
                 src={props.src} 
                 alt={props.alt}
                 layout="fixed"
